@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 
 import agenda.model.base.Activity;
 import agenda.model.repository.classes.RepositoryActivityMock;
@@ -30,9 +31,9 @@ public class AddActivityTest {
 		try {
 			act = new Activity("name1", 
 					df.parse("03/20/2013 12:00"), 
-					df.parse("03/20/2013 13:00"),
+					Duration.ofHours(1),
 					null,
-					"Lunch break");
+					"Lunch break","here");
 			rep.addActivity(act);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -49,17 +50,17 @@ public class AddActivityTest {
 				rep.removeActivity(a);
 			
 			act = new Activity("name1",
-					df.parse("03/20/2013 12:00"), 
-					df.parse("03/20/2013 13:00"),
+					df.parse("03/20/2013 12:00"),
+					Duration.ofHours(1),
 					null,
-					"Lunch break");
+					"Lunch break","here");
 			rep.addActivity(act);
 			
 			act = new Activity("name1",
-					df.parse("03/21/2013 12:00"), 
-					df.parse("03/21/2013 13:00"),
+					df.parse("03/21/2013 12:00"),
+					Duration.ofHours(1),
 					null,
-					"Lunch break");
+					"Lunch break","here");
 			rep.addActivity(act);
 		}
 		catch(Exception e){}	
@@ -79,16 +80,16 @@ public class AddActivityTest {
 			
 			act = new Activity("name1",
 					df.parse("03/20/2013 12:00"), 
-					df.parse("03/20/2013 13:00"),
+					Duration.ofHours(1),
 					null,
-					"Lunch break");
+					"Lunch break","here");
 			rep.addActivity(act);
 			
 			act = new Activity("name1",
-					df.parse("03/20/2013 12:30"), 
-					df.parse("03/20/2013 13:30"),
+					df.parse("03/20/2013 12:30"),
+					Duration.ofHours(1),
 					null,
-					"Lunch break");
+					"Lunch break","here");
 			assertFalse(rep.addActivity(act));
 		}
 		catch(Exception e){}	
@@ -107,24 +108,24 @@ public class AddActivityTest {
 				rep.removeActivity(a);
 			
 			act = new Activity("name1",
-					df.parse("03/20/2013 12:00"), 
-					df.parse("03/20/2013 13:00"),
+					df.parse("03/20/2013 12:00"),
+					Duration.ofHours(1),
 					null,
-					"Lunch break");
+					"Lunch break","here");
 			rep.addActivity(act);
 			
 			act = new Activity("name1",
-					df.parse("03/20/2013 13:30"), 
-					df.parse("03/20/2013 14:00"),
+					df.parse("03/20/2013 13:30"),
+					Duration.ofHours(1),
 					null,
-					"Curs");
+					"Curs","here");
 			rep.addActivity(act);
 			
 			act = new Activity("name1",
-					df.parse("03/20/2013 13:30"), 
-					df.parse("03/20/2013 14:30"),
+					df.parse("03/20/2013 13:30"),
+					Duration.ofHours(1),
 					null,
-					"Lunch break");
+					"Lunch break","here");
 			assertFalse(rep.addActivity(act));			
 		}
 		catch(Exception e){}	
@@ -142,10 +143,10 @@ public class AddActivityTest {
 				rep.removeActivity(a);
 			
 			act = new Activity("name1",
-					df.parse("03/20/2013 12:00"), 
-					df.parse("03/20/2013 13:00"),
+					df.parse("03/20/2013 12:00"),
+					Duration.ofHours(1),
 					null,
-					"Lunch break");
+					"Lunch break","here");
 			rep.addActivity(act);
 			
 			assertFalse(rep.addActivity(act));			

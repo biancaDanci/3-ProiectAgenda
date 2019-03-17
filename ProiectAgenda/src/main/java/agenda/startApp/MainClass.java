@@ -3,6 +3,7 @@ package agenda.startApp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -116,8 +117,10 @@ public class MainClass {
 			String description = in.readLine();
 			System.out.printf("Start Date(format: mm/dd/yyyy): ");
 			String dateS = in.readLine();
-			System.out.printf("Start Time(hh:mm): ");
+			System.out.printf("Time h ");
 			String timeS = in.readLine();
+			System.out.println("Place:");
+			String loc = in.readLine();
 			Calendar c = Calendar.getInstance();
 			c.set(Integer.parseInt(dateS.split("/")[2]),
 					Integer.parseInt(dateS.split("/")[0]) - 1,
@@ -125,21 +128,16 @@ public class MainClass {
 					Integer.parseInt(timeS.split(":")[0]),
 					Integer.parseInt(timeS.split(":")[1]));
 			Date start = c.getTime();
+			Duration end = Duration.ofHours(Long.parseLong(timeS));
 
 			System.out.printf("End Date(format: mm/dd/yyyy): ");
 			String dateE = in.readLine();
 			System.out.printf("End Time(hh:mm): ");
 			String timeE = in.readLine();
 			
-			c.set(Integer.parseInt(dateE.split("/")[2]),
-					Integer.parseInt(dateE.split("/")[0]) - 1,
-					Integer.parseInt(dateE.split("/")[1]),
-					Integer.parseInt(timeE.split(":")[0]),
-					Integer.parseInt(timeE.split(":")[1]));
-			Date end = c.getTime();
 
 			Activity act = new Activity(user.getName(), start, end,
-					new LinkedList<Contact>(), description);
+					new LinkedList<Contact>(), description,loc);
 
 			activityRep.addActivity(act);
 
@@ -161,8 +159,10 @@ public class MainClass {
 			String adress = in.readLine();
 			System.out.printf("Numar de telefon: ");
 			String telefon = in.readLine();
+			System.out.println("Email:");
+			String email = in.readLine();
 			
-			Contact c = new Contact(name, adress, telefon);
+			Contact c = new Contact(name, adress, telefon,email);
 
 			contactRep.addContact(c);
 

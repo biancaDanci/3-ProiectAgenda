@@ -23,7 +23,7 @@ public class User {
 	
 	public boolean setPassword(String oldPasswd, String newPasswd)
 	{
-		if (oldPasswd.equals(password))
+		if (!oldPasswd.equals(password))
 		{
 			password = newPasswd;
 			return true;

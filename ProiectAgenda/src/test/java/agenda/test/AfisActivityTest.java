@@ -2,6 +2,7 @@ package agenda.test;
 
 import static org.junit.Assert.*;
 
+import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -36,18 +37,15 @@ public class AfisActivityTest {
 		c.set(2013, 3 - 1, 20, 12, 00);
 		Date start = c.getTime();
 
-		c.set(2013, 3 - 1, 20, 12, 30);
-		Date end = c.getTime();
-
-		Activity act = new Activity("name1", start, end,
-				new LinkedList<Contact>(), "description2");
+		Activity act = new Activity("name1", start, Duration.ofHours(1),
+				new LinkedList<Contact>(), "description2","here");
 
 		rep.addActivity(act);
 
 		c.set(2013, 3 - 1, 20);
 
 		List<Activity> result = rep.activitiesOnDate("name1", c.getTime());
-		assertTrue(result.size() == 1);
+			assertTrue(result.size() == 1);
 	}
 
 	@Test
@@ -59,11 +57,8 @@ public class AfisActivityTest {
 		c.set(2013, 3 - 1, 20, 12, 00);
 		Date start = c.getTime();
 
-		c.set(2013, 3 - 1, 20, 12, 30);
-		Date end = c.getTime();
-
-		Activity act = new Activity("name1", start, end,
-				new LinkedList<Contact>(), "description2");
+		Activity act = new Activity("name1", start, Duration.ofHours(1),
+				new LinkedList<Contact>(), "description2","here");
 
 		rep.addActivity(act);
 

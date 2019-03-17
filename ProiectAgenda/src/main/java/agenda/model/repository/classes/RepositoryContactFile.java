@@ -15,7 +15,7 @@ import agenda.model.repository.interfaces.RepositoryContact;
 
 public class RepositoryContactFile implements RepositoryContact {
 
-	private static final String filename = "bin\\files\\contacts.txt"; 
+	private static final String filename = "F:\\vvvs\\3-ProiectAgenda\\ProiectAgenda\\files\\contacts.txt";
 	private List<Contact> contacts;
 
 	public RepositoryContactFile() throws Exception {
@@ -31,7 +31,7 @@ public class RepositoryContactFile implements RepositoryContact {
 			while ((line = br.readLine()) != null) {
 				Contact c = null;
 				try {
-					c = Contact.fromString(line, " ");
+					c = Contact.fromString(line, "#");
 				} catch (InvalidFormatException e) {
 					throw new Exception("Error in file at line " + i,
 							new Throwable(e.getCause().getMessage()));

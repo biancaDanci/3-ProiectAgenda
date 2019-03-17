@@ -26,7 +26,7 @@ public class AddContactTest {
 	public void testCase1()
 	{
 		try {
-			con = new Contact("name", "address1", "+4071122334455");
+			con = new Contact("name", "address1", "+4071122334455","bla");
 		} catch (InvalidFormatException e) {
 			assertTrue(false);
 		}
@@ -60,7 +60,7 @@ public class AddContactTest {
 			rep.removeContact(c);
 		
 		try {
-			con = new Contact("name", "address1", "+071122334455");
+			con = new Contact("name", "address1", "+071122334455","bla");
 			rep.addContact(con);
 		} catch (InvalidFormatException e) {
 			assertTrue(false);

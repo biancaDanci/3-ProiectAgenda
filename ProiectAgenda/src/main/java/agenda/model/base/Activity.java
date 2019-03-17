@@ -1,5 +1,6 @@
 package agenda.model.base;
 
+import java.time.Duration;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,12 +10,25 @@ import agenda.model.repository.interfaces.RepositoryContact;
 public class Activity {
 	private String name;
 	private Date start;
-	private Date duration;
+	private Duration duration;
+	private String loc;
 	private List<Contact> contacts;
 	private String description;
-	
-	public Activity(String name, Date start, Date end, List<Contact> contacts,
-			String description) {
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLoc() {
+		return loc;
+	}
+
+	public void setLoc(String loc) {
+		this.loc = loc;
+	}
+
+	public Activity(String name, Date start, Duration duration, List<Contact> contacts,
+					String description, String loc) {
 		this.name = name;
 		this.description = description;
 		if (contacts == null)
@@ -24,8 +38,8 @@ public class Activity {
 
 		this.start = new Date();
 		this.start.setTime(start.getTime());
-		this.duration = new Date();
-		this.duration.setTime(end.getTime());
+		this.duration =  duration;
+		this.loc = loc;
 	}
 
 	public String getName() {
@@ -40,11 +54,11 @@ public class Activity {
 		this.start = start;
 	}
 
-	public Date getDuration() {
+	public Duration getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Date duration) {
+	public void setDuration(Duration duration) {
 		this.duration = duration;
 	}
 
@@ -76,9 +90,9 @@ public class Activity {
 	}
 
 	public boolean intersect(Activity act) {
-		if (start.compareTo(act.duration) < 0
-				&& act.start.compareTo(duration) < 0)
-			return true;
+		//if (start.compareTo(act.duration) < 0
+		//		&& act.start.compareTo(duration) < 0)
+		//	return true;
 		return false;
 	}
 
@@ -89,9 +103,11 @@ public class Activity {
 		sb.append("#");
 		sb.append(start.getTime());
 		sb.append("#");
-		sb.append(duration.getTime());
+		sb.append(duration.toString());
 		sb.append("#");
 		sb.append(description);
+		sb.append("#");
+		sb.append(loc);
 		sb.append("#");
 		for (Contact c : contacts) {
 			sb.append("#");
@@ -105,13 +121,16 @@ public class Activity {
 			String[] str = line.split("#");
 			String name = str[0];
 			Date start = new Date(Long.parseLong(str[1]));
-			Date duration = new Date(Long.parseLong(str[2]));
+			Duration duration = Duration.ofHours(Long.parseLong(str[2]));
 			String description = str[3];
+			String loc = str[4];
 			List<Contact> conts = new LinkedList<Contact>();
 			for (int i = 5; i < str.length; i++) {
 				conts.add(repcon.getByName(str[i]));
 			}
-			return new Activity(name, start, duration, conts, description);
+			System.out.println("start" + start);
+			System.out.println("duration" + duration);
+			return new Activity(name, start, duration, conts, description,loc);
 		} catch (Exception e) {
 			return null;
 		}

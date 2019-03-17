@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -41,7 +42,7 @@ public class IntegrationTest {
 		int n = repCon.count();
 
 		try {
-			Contact c = new Contact("name", "address1", "+071122334455");
+			Contact c = new Contact("name", "address1", "+071122334455","bla");
 			repCon.addContact(c);
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();
@@ -56,7 +57,7 @@ public class IntegrationTest {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		try {
 			act = new Activity("name1", df.parse("03/20/2013 12:00"),
-					df.parse("03/20/2013 13:00"), null, "Lunch break");
+                    Duration.ofHours(1), null, "Lunch break","here");
 			repAct.addActivity(act);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -71,11 +72,9 @@ public class IntegrationTest {
 		c.set(2013, 3 - 1, 20, 12, 00);
 		Date start = c.getTime();
 
-		c.set(2013, 3 - 1, 20, 12, 30);
-		Date end = c.getTime();
 
-		Activity act = new Activity("name1", start, end,
-				new LinkedList<Contact>(), "description2");
+		Activity act = new Activity("name1", start, Duration.ofHours(1),
+				new LinkedList<Contact>(), "description2","here");
 
 		repAct.addActivity(act);
 
@@ -91,7 +90,7 @@ public class IntegrationTest {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		try {
 			act = new Activity("name1", df.parse("03/20/2013 12:00"),
-					df.parse("03/20/2013 13:00"), null, "Lunch break");
+                    Duration.ofHours(1), null, "Lunch break","here");
 			repAct.addActivity(act);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -113,7 +112,7 @@ public class IntegrationTest {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		try {
 			act = new Activity("name1", df.parse("03/20/2013 12:00"),
-					df.parse("03/20/2013 13:00"), null, "Lunch break");
+                    Duration.ofHours(1), null, "Lunch break","here");
 			repAct.addActivity(act);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -137,7 +136,7 @@ public class IntegrationTest {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		try {
 			act = new Activity("name1", df.parse("03/20/2013 12:00"),
-					df.parse("03/20/2013 13:00"), null, "Lunch break");
+                    Duration.ofHours(1), null, "Lunch break","here");
 			repAct.addActivity(act);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -158,7 +157,7 @@ public class IntegrationTest {
 		int n = repCon.count();
 
 		try {
-			Contact c = new Contact("name", "address1", "+071122334455");
+			Contact c = new Contact("name", "address1", "+071122334455","bla");
 			repCon.addContact(c);
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();
@@ -170,7 +169,7 @@ public class IntegrationTest {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		try {
 			act = new Activity("name1", df.parse("03/20/2013 12:00"),
-					df.parse("03/20/2013 13:00"), null, "Lunch break");
+                    Duration.ofHours(1), null, "Lunch break", "here");
 			repAct.addActivity(act);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -200,7 +199,7 @@ public class IntegrationTest {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		try {
 			act = new Activity("name1", df.parse("03/20/2013 12:00"),
-					df.parse("03/20/2013 13:00"), null, "Lunch break");
+                    Duration.ofHours(1), null, "Lunch break","here");
 			repAct.addActivity(act);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -222,7 +221,7 @@ public class IntegrationTest {
 		int n = repCon.count();
 
 		try {
-			Contact c = new Contact("name", "address1", "+071122334455");
+			Contact c = new Contact("name", "address1", "+071122334455","bla");
 			repCon.addContact(c);
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();
@@ -234,7 +233,7 @@ public class IntegrationTest {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		try {
 			act = new Activity("name1", df.parse("03/20/2013 12:00"),
-					df.parse("03/20/2013 13:00"), null, "Lunch break");
+                    Duration.ofHours(1), null, "Lunch break","here");
 			repAct.addActivity(act);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -259,7 +258,7 @@ public class IntegrationTest {
 		int n = repCon.count();
 
 		try {
-			Contact c = new Contact("name", "address1", "+071122334455");
+			Contact c = new Contact("name", "address1", "+071122334455","bla");
 			repCon.addContact(c);
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();
@@ -271,7 +270,7 @@ public class IntegrationTest {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		try {
 			act = new Activity("name1", df.parse("03/20/2013 12:00"),
-					df.parse("03/20/2013 13:00"), null, "Lunch break");
+                    Duration.ofHours(1), null, "Lunch break","here");
 			repAct.addActivity(act);
 		} catch (ParseException e) {
 			e.printStackTrace();

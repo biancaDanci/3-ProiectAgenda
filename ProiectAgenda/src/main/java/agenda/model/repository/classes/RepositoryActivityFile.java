@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +17,7 @@ import agenda.model.repository.interfaces.RepositoryContact;
 
 public class RepositoryActivityFile implements RepositoryActivity{
 
-	private static final String filename = "bin\\files\\activities.dat"; 
+	private static final String filename = "files\\activities.txt";
 	private List<Activity> activities;
 	
 	public RepositoryActivityFile(RepositoryContact repcon) throws Exception
@@ -53,12 +54,21 @@ public class RepositoryActivityFile implements RepositoryActivity{
 	public boolean addActivity(Activity activity) {
 		int  i = 0;
 		boolean conflicts = false;
-		
+		Calendar cal = Calendar.getInstance();
 		while( i < activities.size() )
 		{
-			if ( activities.get(i).getStart().compareTo(activity.getDuration()) < 0 &&
-					activity.getStart().compareTo(activities.get(i).getDuration()) < 0 )
+			cal.setTime(activity.getStart());
+			cal.add(Calendar.HOUR_OF_DAY, (int) activity.getDuration().toHours()); // adds one hour
+			Date end_activity = cal.getTime();
+
+			cal.setTime(activities.get(i).getStart()); // sets calendar time/date
+			cal.add(Calendar.HOUR_OF_DAY, (int) activities.get(i).getDuration().toHours()); // adds one hour
+			Date end_activities = cal.getTime();
+			if(activity.getStart().compareTo(end_activities)<=0 &&
+			end_activity.compareTo(activities.get(i).getStart())>=0)
+
 				conflicts = true;
+			
 			i++;
 		}
 		if ( !conflicts )
@@ -67,14 +77,7 @@ public class RepositoryActivityFile implements RepositoryActivity{
 			return true;
 		}
 		return false;
-//		for (int i = 0; i< activities.size(); i++)
-//		{
-//			if (activity.intersect(activities.get(i))) return false;
-//		}	
-//		int index = activities.indexOf(activity);
-//		//if (index >= 0 ) return false;
-//		activities.add(activity);
-//		return true;
+
 	}
 
 	@Override
@@ -111,7 +114,7 @@ public class RepositoryActivityFile implements RepositoryActivity{
 	public List<Activity> activitiesByName(String name) {
 		List<Activity> result1 = new LinkedList<Activity>();
 		for (Activity a : activities)
-			if (a.getName().equals(name) == false) result1.add(a);
+			if (a.getName().equals(name)) result1.add(a);
 		List<Activity> result = new LinkedList<Activity>();
 		while (result1.size() >= 0 )
 		{
@@ -134,14 +137,12 @@ public class RepositoryActivityFile implements RepositoryActivity{
 	@Override
 	public List<Activity> activitiesOnDate(String name, Date d) {
 		List<Activity> result1 = new LinkedList<Activity>();
+
 		for (Activity a : activities)
 			if (a.getName().equals(name))
-				if ((a.getStart().getYear() == d.getYear() &&
+				if (a.getStart().getYear() == d.getYear() &&
 					a.getStart().getMonth() == d.getMonth() &&
-					a.getStart().getDate() == d.getDate()) ||
-					( a.getDuration().getYear() == d.getYear() && 
-					a.getDuration().getMonth() == d.getMonth() &&
-					a.getDuration().getDate() == d.getDate())) result1.add(a);
+					a.getStart().getDate() == d.getDate()) result1.add(a);
 		List<Activity> result = new LinkedList<Activity>();
 		while (result1.size() > 0 )
 		{

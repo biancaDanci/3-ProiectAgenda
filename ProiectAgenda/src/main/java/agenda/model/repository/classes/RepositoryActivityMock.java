@@ -1,6 +1,7 @@
 package agenda.model.repository.classes;
 
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,12 +50,24 @@ public class RepositoryActivityMock implements RepositoryActivity {
 	public boolean addActivity(Activity activity) {
 		int  i = 0;
 		boolean conflicts = false;
-		
+
+		Calendar cal = Calendar.getInstance();
 		while( i < activities.size() )
 		{
-			if ( activities.get(i).getStart().compareTo(activity.getDuration()) < 0 &&
-					activity.getStart().compareTo(activities.get(i).getDuration()) < 0 )
+			// creates calendar
+			cal.setTime(activity.getStart()); // sets calendar time/date
+			cal.add(Calendar.HOUR_OF_DAY, (int) activity.getDuration().toHours()); // adds one hour
+			Date end_activity = cal.getTime();
+
+			cal.setTime(activities.get(i).getStart()); // sets calendar time/date
+			cal.add(Calendar.HOUR_OF_DAY, (int) activities.get(i).getDuration().toHours()); // adds one hour
+			Date end_activities = cal.getTime();
+			System.out.println();
+			if(activity.getStart().compareTo(end_activities)<=0 &&
+					end_activity.compareTo(activities.get(i).getStart())>=0)
+				//if(end_activities.compareTo(end_activity)<0) {
 				conflicts = true;
+			//}
 			i++;
 		}
 		if ( !conflicts )
@@ -103,9 +116,10 @@ public class RepositoryActivityMock implements RepositoryActivity {
 	public List<Activity> activitiesOnDate(String name, Date d) {
 		List<Activity> result = new LinkedList<Activity>();
 		for (Activity a : activities)
-			if (a.getName().equals(name))
-				if (a.getStart().compareTo(d) <= 0 && d.compareTo(a.getDuration()) <= 0 ) result.add(a);
-		return result;
+			if (a.getName().equals(name)) {
+				if (a.getStart().compareTo(d) <= 0) result.add(a);
+			}
+				return result;
 	}
 
 }
