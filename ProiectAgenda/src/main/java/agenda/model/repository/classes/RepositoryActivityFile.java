@@ -55,20 +55,24 @@ public class RepositoryActivityFile implements RepositoryActivity{
 		int  i = 0;
 		boolean conflicts = false;
 		Calendar cal = Calendar.getInstance();
+		if (activity.getName().length()==0)
+			return false;
+		else if (activity.getDescription().length()==0)
+			return false;
 		while( i < activities.size() )
 		{
 			cal.setTime(activity.getStart());
-			cal.add(Calendar.HOUR_OF_DAY, (int) activity.getDuration().toHours()); // adds one hour
+			cal.add(Calendar.HOUR_OF_DAY, (int) activity.getDuration().toHours());
 			Date end_activity = cal.getTime();
 
-			cal.setTime(activities.get(i).getStart()); // sets calendar time/date
-			cal.add(Calendar.HOUR_OF_DAY, (int) activities.get(i).getDuration().toHours()); // adds one hour
+			cal.setTime(activities.get(i).getStart());
+			cal.add(Calendar.HOUR_OF_DAY, (int) activities.get(i).getDuration().toHours());
 			Date end_activities = cal.getTime();
 			if(activity.getStart().compareTo(end_activities)<=0 &&
 			end_activity.compareTo(activities.get(i).getStart())>=0)
 
 				conflicts = true;
-			
+
 			i++;
 		}
 		if ( !conflicts )
@@ -76,7 +80,7 @@ public class RepositoryActivityFile implements RepositoryActivity{
 			activities.add(activity);
 			return true;
 		}
-		return false;
+		else return false;
 
 	}
 
