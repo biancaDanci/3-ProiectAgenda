@@ -141,7 +141,8 @@ public class RepositoryActivityFile implements RepositoryActivity{
 	@Override
 	public List<Activity> activitiesOnDate(String name, Date d) {
 		List<Activity> result1 = new LinkedList<Activity>();
-
+		if (name.equals(""))
+			return null;
 		for (Activity a : activities)
 			if (a.getName().equals(name))
 				if (a.getStart().getYear() == d.getYear() &&

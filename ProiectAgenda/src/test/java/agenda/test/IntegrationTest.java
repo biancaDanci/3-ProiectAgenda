@@ -67,24 +67,6 @@ public class IntegrationTest {
 	}
 
 	@Test
-	public void test3() {
-		Calendar c = Calendar.getInstance();
-		c.set(2013, 3 - 1, 20, 12, 00);
-		Date start = c.getTime();
-
-
-		Activity act = new Activity("name1", start, Duration.ofHours(1),
-				new LinkedList<Contact>(), "description2","here");
-
-		repAct.addActivity(act);
-
-		c.set(2013, 3 - 1, 20);
-
-		List<Activity> result = repAct.activitiesOnDate("name1", c.getTime());
-		assertTrue(result.size() == 1);
-	}
-
-	@Test
 	public void test4() {
 		Activity act = null;
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
